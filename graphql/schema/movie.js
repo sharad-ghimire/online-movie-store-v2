@@ -3,7 +3,7 @@ module.exports = gql`
   type Movie {
     id: Int!
     name: String!
-    poster_ur: String!
+    poster_url: String!
     description: String!
     price: Float!
     quantity: Int!
@@ -18,15 +18,16 @@ module.exports = gql`
     createMovie(
       id: Int!
       name: String!
-      poster_ur: String!
+      poster_url: String!
       description: String!
       price: Float!
       quantity: Int!
     ): Movie!
-    editUser(
+
+    editMovie(
       id: Int!
       name: String
-      poster_ur: String
+      poster_url: String
       description: String
       price: Float
       quantity: Int

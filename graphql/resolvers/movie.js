@@ -4,20 +4,42 @@ const SERVER_URI = 'http://localhost:3000';
 module.exports = {
   Query: {
     getMovie: (parent, { id }) =>
-      axios.get(`${SERVER_URI}/users/${id}`).then((res) => res.data),
+      axios.get(`${SERVER_URI}/movies/${id}`).then((res) => res.data),
     getAllMovies: (parent, args) =>
-      axios.get(`${SERVER_URI}/users`).then((res) => res.data)
+      axios.get(`${SERVER_URI}/movies`).then((res) => res.data)
   },
   Mutation: {
-    createUser: (parent, { id, username, name, email, password }) =>
+    createMovie: (
+      parent,
+      { id, name, poster_url, description, price, quantity }
+    ) =>
       axios
-        .post(`${SERVER_URI}/users`, { id, username, name, email, password })
+        .post(`${SERVER_URI}/movies`, {
+          id,
+          name,
+          poster_url,
+          description,
+          price,
+          quantity
+        })
         .then((res) => res.data),
-    editUser: (parent, { id, username, name, email, password }) =>
+    editMovie: (
+      parent,
+      { id, name, poster_url, description, price, quantity }
+    ) =>
       axios
-        .patch(`${SERVER_URI}/users/${id}`, { id, name, email, username })
+        .patch(`${SERVER_URI}/movies/${id}`, {
+          id,
+          name,
+          poster_url,
+          description,
+          price,
+          quantity
+        })
         .then((res) => res.data),
-    deleteUser: (parent, { id }) =>
-      axios.delete(`${SERVER_URI}/users/${id}`).then((res) => 'Deleted!!!')
+    deleteMovie: (parent, { id }) =>
+      axios
+        .delete(`${SERVER_URI}/movies/${id}`)
+        .then((res) => 'Movie Deleted!!!')
   }
 };
