@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "sharadghimire",
+      "name": "Sharad Ghimire",
+      "email": "sharadghimire5551@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": 2,
+      "username": "pramish",
+      "name": "Pramish Luitel",
+      "email": "pramishluitel@gmail.com",
+      "password": "34231"
+    },
+    {
+      "id": 3,
+      "username": "jeshon",
+      "name": "Jeshon Shreastha",
+      "email": "jeshonshreastha@gmail.com",
+      "password": "2342"
+    },
+    {
+      "id": 4,
+      "username": "rohit",
+      "name": "Rohit Gurung",
+      "email": "rohitgurung@gmail.com",
+      "password": "243"
+    }
+  ],
+  "movies": [],
+  "orders": []
+}
