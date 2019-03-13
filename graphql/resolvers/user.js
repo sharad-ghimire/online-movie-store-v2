@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const axios = require('axios');
 const SERVER_URI = 'http://localhost:3000';
 module.exports = {

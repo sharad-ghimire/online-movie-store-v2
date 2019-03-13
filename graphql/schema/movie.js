@@ -9,6 +9,10 @@ module.exports = gql`
     quantity: Int!
   }
 
+  input MovieInput {
+    id: Int!
+  }
+
   type Query {
     getMovie(id: Int!): Movie!
     getAllMovies: [Movie!]!

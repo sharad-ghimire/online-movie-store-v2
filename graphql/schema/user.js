@@ -8,6 +8,10 @@ module.exports = gql`
     password: String!
   }
 
+  input UserInput {
+    username: String!
+  }
+
   type Query {
     getUser(id: Int!): User!
     getAllUsers: [User!]!
