@@ -29,6 +29,39 @@
       "password": "243"
     }
   ],
-  "movies": [],
+  "movies": [
+    {
+      "id": 1,
+      "name": "Avengers",
+      "poster_url": "someurl.jpeg",
+      "description": "orem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "price": 12.44,
+      "quantity": 11
+    },
+    {
+      "id": 2,
+      "name": "Star Wars",
+      "poster_url": "someurl.jpeg",
+      "description": "orem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "price": 2.44,
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "name": "Taken",
+      "poster_url": "someurl.jpeg",
+      "description": "orem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "price": 12.0,
+      "quantity": 12
+    },
+    {
+      "id": 4,
+      "name": "Ant Man",
+      "poster_url": "someurl.jpeg",
+      "description": "orem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "price": 2.44,
+      "quantity": 21
+    }
+  ],
   "orders": []
 }
