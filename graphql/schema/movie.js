@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 module.exports = gql`
   type Movie {
-    id: Int!
+    _id: ID!
     name: String!
     poster_url: String!
     description: String!
@@ -10,32 +10,19 @@ module.exports = gql`
   }
 
   input MovieInput {
-    id: Int!
+    name: String!
+    poster_url: String!
+    description: String!
+    price: Float!
+    quantity: Int!
   }
 
   type Query {
-    getMovie(id: Int!): Movie!
+    getMovie(id: ID!): Movie!
     getAllMovies: [Movie!]!
   }
 
   type Mutation {
-    createMovie(
-      id: Int!
-      name: String!
-      poster_url: String!
-      description: String!
-      price: Float!
-      quantity: Int!
-    ): Movie!
-
-    editMovie(
-      id: Int!
-      name: String
-      poster_url: String
-      description: String
-      price: Float
-      quantity: Int
-    ): Movie
-    deleteMovie(id: Int!): String!
+    createMovie(movie: MovieInput): Movie!
   }
 `;
