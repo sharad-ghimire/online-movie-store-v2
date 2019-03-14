@@ -4,29 +4,28 @@ import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 
-class Movies extends Component {
+class Movie extends Component {
   state = {
     search: ''
   };
 
   render() {
+    const id = this.props.match.params.id;
     return (
       <div>
         <Navbar />
-        <Query query={query}>
+        <Query query={movie_query} variables={{ id }}>
           {({ loading, error, data }) => {
             if (loading) return <p>Loading</p>;
             if (error) console.log(error);
             console.log(data);
-
+            const movie = data.getMovie;
             return (
               <div className='container'>
-                {data.getAllMovies.map((movie) => (
-                  <Link key={movie._id} to={`/movies/${movie._id}`}>
-                    <h1>{movie.name}</h1>
-                    <p>{movie.description}</p>
-                  </Link>
-                ))}
+                <div key={movie._id}>
+                  <h1>{movie.name}</h1>
+                  <p>{movie.description}</p>
+                </div>
               </div>
             );
           }}
@@ -36,16 +35,15 @@ class Movies extends Component {
   }
 }
 
-const query = gql`
-  {
-    getAllMovies {
+const movie_query = gql`
+  query movie($id: ID!) {
+    getMovie(id: $id) {
       name
       poster_url
       description
       price
       quantity
-      _id
     }
   }
 `;
-export default Movies;
+export default Movie;

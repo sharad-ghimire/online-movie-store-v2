@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import config from './config';
 import Home from './components/Home';
 import Movies from './components/Movies';
+import Movie from './components/Movie';
+import Navbar from './components/Navbar';
 
 const client = new ApolloClient({
   uri: config.GRAPHQL_ENDPOINT
@@ -20,6 +22,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/movies' component={Movies} />
+              <Route exact path='/movies/:id' component={Movie} />
             </Switch>
           </BrowserRouter>
         </div>
