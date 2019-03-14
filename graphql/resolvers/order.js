@@ -17,14 +17,16 @@ module.exports = {
     }
   },
   Mutation: {
-    createOrder: async (parent, { movieIds }) => {
+    createOrder: async (parent, { movies }) => {
       const newOrder = new Order({
-        user: req.userId,
-        movies: movieIds
+        user: '5c89a35223d5d341e0170814',
+        movies: movies
       });
+
       try {
         const result = await newOrder.save();
-        return result;
+        const actualResult = Order.findById(result.id).populate('user movies');
+        return actualResult;
       } catch (error) {
         throw error;
       }

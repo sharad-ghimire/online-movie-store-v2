@@ -6,6 +6,9 @@ module.exports = gql`
     movies: [Movie]!
     createAt: String!
   }
+  input OrderMovieInput {
+    _id: ID!
+  }
 
   type Query {
     getOrder(id: ID!): Order!
@@ -13,6 +16,6 @@ module.exports = gql`
   }
 
   type Mutation {
-    createOrder(movies: [MovieInput]): Order!
+    createOrder(movies: [OrderMovieInput]): Order!
   }
 `;
