@@ -1,7 +1,8 @@
 const Order = require('../../model/Order');
 module.exports = {
   Query: {
-    getOrder: async (parent, { id }) => {
+    getOrder: async (parent, { id }, req) => {
+      if (!req.isAuth) throw new Error('Unauthenticated!');
       try {
         const order = await Order.findById(id);
         return order;
@@ -9,7 +10,8 @@ module.exports = {
         throw error;
       }
     },
-    getAllOrders: async (parent, { userid }) => {
+    getAllOrders: async (parent, { userid }, req) => {
+      if (!req.isAuth) throw new Error('Unauthenticated!');
       try {
         const orders = await Order.find({ user: userid });
         return orders;
@@ -17,9 +19,10 @@ module.exports = {
     }
   },
   Mutation: {
-    createOrder: async (parent, { movies }) => {
+    createOrder: async (parent, { movies }, req) => {
+      if (!req.isAuth) throw new Error('Unauthenticated!');
       const newOrder = new Order({
-        user: '5c89a35223d5d341e0170814',
+        user: req.userId,
         movies: movies
       });
 

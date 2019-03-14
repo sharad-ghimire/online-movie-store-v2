@@ -23,6 +23,7 @@ const resolvers = mergeResolvers(
 const isAuth = require('./middleware/is-auth.js');
 
 const app = express();
+app.use(bodyParser.json());
 app.use(cors('*'));
 app.use(isAuth);
 app.use('*', (req, res, next) => {
