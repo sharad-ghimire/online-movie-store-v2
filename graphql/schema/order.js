@@ -4,7 +4,7 @@ module.exports = gql`
     id: Int!
     user: User!
     movies: [Movie]!
-    date: String!
+    bookedDate: String!
   }
 
   type Query {

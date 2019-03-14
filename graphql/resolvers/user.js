@@ -1,22 +1,64 @@
-const axios = require('axios');
-const SERVER_URI = 'http://localhost:3000';
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../../model/User.js');
+
 module.exports = {
   Query: {
-    getUser: (parent, { id }) =>
-      axios.get(`${SERVER_URI}/users/${id}`).then((res) => res.data),
-    getAllUsers: (parent, args) =>
-      axios.get(`${SERVER_URI}/users`).then((res) => res.data)
+    login: async (root, { username, password }) => {
+      try {
+        const user = await User.findOne({ username });
+        if (!user) throw new Error('User does not exit');
+        const passwordIsEqual = await bcrypt.compare(password, user.password);
+        if (!passwordIsEqual) throw new Error('Incorrect Password');
+
+        // If everthing is correct we have to create a token
+        const token = await jwt.sign(
+          {
+            userId: user.id,
+            username: user.username
+          },
+          process.env.KEY,
+          { expiresIn: '1h' }
+        );
+
+        return {
+          userId: user.id,
+          token,
+          tokenExpiration: 1
+        };
+      } catch (error) {
+        throw error;
+      }
+    }
   },
   Mutation: {
-    createUser: (parent, { id, username, name, email, password }) =>
-      axios
-        .post(`${SERVER_URI}/users`, { id, username, name, email, password })
-        .then((res) => res.data),
-    editUser: (parent, { id, username, name, email, password }) =>
-      axios
-        .patch(`${SERVER_URI}/users/${id}`, { id, name, email, username })
-        .then((res) => res.data),
-    deleteUser: (parent, { id }) =>
-      axios.delete(`${SERVER_URI}/users/${id}`).then((res) => 'Deleted!!!')
+    createUser: async (root, { user }) => {
+      console.log(user);
+
+      try {
+        const userInDB = await User.findOne({ username: user.username });
+        if (userInDB) throw new Error('User already exits');
+        console.log(user.username, 'Password?');
+
+        const hashedPassword = await bcrypt.hash(user.password, 10);
+        console.log(hashedPassword);
+
+        const newUser = new User({
+          name: user.name,
+          email: user.email,
+          username: user.username,
+          password: hashedPassword
+        });
+
+        const actualUser = await newUser.save();
+        return {
+          _id: actualUser.id,
+          password: null,
+          ...actualUser._doc
+        };
+      } catch (error) {
+        throw error;
+      }
+    }
   }
 };
